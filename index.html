@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parts of Me - Internal Family Systems Art Experience</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sage-green: #87A878;
+            --soft-sage: #A8C09A;
+            --earth-green: #6B8E23;
+            --warm-terracotta: #D2691E;
+            --soft-coral: #F4A09C;
+            --gentle-lavender: #B19CD9;
+            --warm-sand: #F5DEB3;
+            --midnight: #1E293B;
+            --slate: #475569;
+            --warm-gray: #6B6B6B;
+            --pearl: #F8FAFC;
+            --cream: #FFF8E7;
+            --gradient-earth: linear-gradient(135deg, #87A878 0%, #7BA7BC 100%);
+            --gradient-warm: linear-gradient(135deg, #F4A09C 0%, #B19CD9 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.08) 0%, rgba(168, 192, 154, 0.08) 100%);
+            min-height: 100vh;
+            color: var(--midnight);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background elements */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 25s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-circle1 {
+            width: 400px;
+            height: 400px;
+            background: var(--sage-green);
+            top: -150px;
+            right: -150px;
+        }
+
+        .bg-circle2 {
+            width: 500px;
+            height: 500px;
+            background: var(--gentle-lavender);
+            bottom: -200px;
+            left: -200px;
+            animation-delay: -8s;
+        }
+
+        .bg-circle3 {
+            width: 350px;
+            height: 350px;
+            background: var(--soft-coral);
+            top: 40%;
+            right: 15%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(40px, -40px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: var(--gradient-earth);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--warm-gray);
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .theme-quote {
+            font-style: italic;
+            color: var(--slate);
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            line-height: 1.6;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            border-left: 4px solid var(--sage-green);
+        }
+
+        /* Navigation */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid transparent;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .nav-pill.active {
+            background: var(--gradient-earth);
+            color: white;
+        }
+
+        /* Page System */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-earth);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            color: var(--midnight);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-symbol {
+            font-size: 2rem;
+            background: var(--gradient-earth);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* IFS Concepts Grid */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, var(--cream) 0%, white 100%);
+            padding: 1.75rem;
+            border-radius: 16px;
+            border: 2px solid rgba(135, 168, 120, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(135, 168, 120, 0.25);
+            border-color: var(--sage-green);
+        }
+
+        .concept-card h3 {
+            color: var(--earth-green);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-card p {
+            color: var(--slate);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .concept-symbol {
+            font-size: 1.5rem;
+        }
+
+        /* Station Grid */
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .station-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 6px solid var(--sage-green);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .station-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+        }
+
+        .station-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-earth);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .station-card h3 {
+            color: var(--midnight);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .station-card .station-description {
+            color: var(--slate);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .prompts-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .prompts-list li {
+            padding: 0.75rem;
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.05) 0%, rgba(168, 192, 154, 0.05) 100%);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            color: var(--slate);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .prompts-list li::before {
+            content: '◈';
+            color: var(--sage-green);
+            margin-right: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Expandable Content */
+        .expandable {
+            background: linear-gradient(135deg, rgba(244, 164, 156, 0.08) 0%, rgba(177, 156, 217, 0.08) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expandable:hover {
+            background: linear-gradient(135deg, rgba(244, 164, 156, 0.12) 0%, rgba(177, 156, 217, 0.12) 100%);
+        }
+
+        .expandable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--midnight);
+        }
+
+        .expandable-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+        }
+
+        .expandable.open .expandable-content {
+            max-height: 1000px;
+            margin-top: 1rem;
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .expandable.open .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Reflection Tool */
+        .reflection-section {
+            background: linear-gradient(135deg, rgba(255, 248, 231, 0.6) 0%, rgba(255, 255, 255, 0.6) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--midnight);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .input-group textarea,
+        .input-group input,
+        .input-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(135, 168, 120, 0.3);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: white;
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+
+        .input-group textarea {
+            min-height: 100px;
+        }
+
+        .input-group textarea:focus,
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: var(--sage-green);
+            box-shadow: 0 0 0 3px rgba(135, 168, 120, 0.1);
+        }
+
+        .btn {
+            padding: 0.85rem 2.5rem;
+            background: var(--gradient-earth);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(135, 168, 120, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(135, 168, 120, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--earth-green);
+            border: 2px solid var(--sage-green);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(135, 168, 120, 0.1);
+        }
+
+        /* Parts Map */
+        .parts-map {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+            border: 2px solid var(--sage-green);
+        }
+
+        .part-item {
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.05) 0%, rgba(168, 192, 154, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--sage-green);
+        }
+
+        .part-item h4 {
+            color: var(--earth-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .part-item p {
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        /* Info boxes */
+        .info-box {
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.1) 0%, rgba(168, 192, 154, 0.1) 100%);
+            border-left: 4px solid var(--sage-green);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box strong {
+            color: var(--earth-green);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Crisis Resources */
+        .crisis-box {
+            background: linear-gradient(135deg, rgba(244, 164, 156, 0.1) 0%, rgba(210, 105, 30, 0.1) 100%);
+            border: 2px solid var(--warm-terracotta);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .crisis-box h3 {
+            color: var(--warm-terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .crisis-box p {
+            color: var(--slate);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            .nav-container { flex-direction: column; align-items: stretch; }
+            .stations-grid { grid-template-columns: 1fr; }
+            .concepts-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background -->
+    <div class="bg-circle bg-circle1"></div>
+    <div class="bg-circle bg-circle2"></div>
+    <div class="bg-circle bg-circle3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Parts of Me</h1>
+            <p class="subtitle">An Internal Family Systems Journey Through Creative Expression</p>
+            <div class="theme-quote">
+                "All parts are welcome here. Each holds wisdom, each seeks connection, each deserves compassion."
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-container">
+            <button class="nav-pill active" onclick="showPage(0)">◈ Opening & Orientation</button>
+            <button class="nav-pill" onclick="showPage(1)">◈ IFS Foundations</button>
+            <button class="nav-pill" onclick="showPage(2)">◈ Seven Stations</button>
+            <button class="nav-pill" onclick="showPage(3)">◈ Integration & Closing</button>
+        </div>
+
+        <!-- PAGE 1: OPENING & ORIENTATION -->
+        <div class="page active" id="page0">
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Welcome & Group Agreements</h2>
+                
+                <div class="info-box">
+                    <strong>Today's Intention:</strong>
+                    We gather to explore the many parts that make us whole. Through creative expression, we'll meet different aspects of ourselves with curiosity and compassion, recognizing that all parts have positive intentions, even when their methods cause pain.
+                </div>
+
+                <h3 style="color: var(--earth-green); margin: 2rem 0 1rem;">Group Agreements</h3>
+                <div class="concepts-grid">
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Pass Option</h3>
+                        <p>You can always pass on any activity, prompt, or sharing. Your presence is enough.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Process > Product</h3>
+                        <p>This isn't about artistic skill. It's about the journey of discovery and expression.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Confidentiality</h3>
+                        <p>What's shared here stays here. Take the lessons, leave the stories.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Self-Compassion</h3>
+                        <p>Notice parts that judge or criticize. Can we invite them to step back gently?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Opening Grounding</h2>
+                
+                <div class="reflection-section">
+                    <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong style="color: var(--earth-green);">Guided Centering Practice (5 minutes)</strong><br><br>
+                        Find a comfortable position. Notice where your body meets the chair, the floor.<br>
+                        Take three deep breaths... breathing in awareness, breathing out tension.<br><br>
+                        
+                        Imagine a calm, centered place inside you. Some call it Self, some call it essence, some call it your wise witness. This is the part of you that can observe without judgment, hold without clinging.<br><br>
+                        
+                        From this calm center, notice: What parts are present today?<br>
+                        Perhaps an excited part, eager to create?<br>
+                        Perhaps a worried part, concerned about doing this "right"?<br>
+                        Perhaps a tired part, just trying to make it through?<br><br>
+                        
+                        Whatever parts are here... welcome them. We're about to meet them more deeply.
+                    </p>
+                </div>
+            </div>
+
+            <div class="crisis-box">
+                <h3>◈ Emotional Safety Reminder</h3>
+                <p>
+                    This work can surface vulnerable feelings. If at any time you feel overwhelmed, you can:
+                    • Step out and take a break
+                    • Signal to the facilitator for support
+                    • Engage with the materials in whatever way feels safe
+                    <br><br>
+                    <strong>Crisis Resources:</strong> National Suicide Prevention Lifeline: 988 | Crisis Text Line: Text HOME to 741741
+                </p>
+            </div>
+        </div>
+
+        <!-- PAGE 2: IFS FOUNDATIONS -->
+        <div class="page" id="page1">
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Understanding Our Inner System</h2>
+                
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 2rem;">
+                    Internal Family Systems (IFS) therapy teaches that our psyche is naturally multiple - we have many different "parts" or sub-personalities, each with its own perspective, feelings, and role. Rather than seeing these parts as problems, IFS invites us to understand them as protective aspects of ourselves, each trying to help in its own way.
+                </p>
+
+                <div class="concepts-grid">
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◇</span> Self / Core</h3>
+                        <p>The calm, compassionate center that can hold all parts. Characterized by the 8 C's: Curiosity, Clarity, Compassion, Connectedness, Confidence, Courage, Creativity, Calm.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">▽</span> Exiles</h3>
+                        <p>Vulnerable parts carrying painful emotions from the past. Often young, hurt, scared, or ashamed. They hold our wounds and unmet needs.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">△</span> Managers</h3>
+                        <p>Protective parts that try to control situations to prevent pain. They plan, criticize, strive for perfection, people-please, intellectualize.</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">⬡</span> Firefighters</h3>
+                        <p>Reactive parts that emerge when exiles break through. They distract, numb, escape through substances, binge behaviors, dissociation, or rage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Key IFS Concepts for Today</h2>
+
+                <div class="expandable" onclick="toggleExpand(this)">
+                    <div class="expandable-header">
+                        <span>◈ Positive Intent</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p style="color: var(--slate); line-height: 1.7;">
+                            Every part, no matter how destructive its behavior, has a positive intention. The harsh inner critic is trying to protect you from failure. The part that numbs with substances is trying to protect you from overwhelming pain. Understanding the positive intent helps us approach parts with curiosity rather than judgment.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="expandable" onclick="toggleExpand(this)">
+                    <div class="expandable-header">
+                        <span>◈ Polarization</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p style="color: var(--slate); line-height: 1.7;">
+                            Parts can be in conflict - one part wants to work hard, another wants to rest. One part wants connection, another wants safety through isolation. These polarizations are normal. The goal isn't to eliminate one side, but to help both parts feel heard and find a balanced way forward.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="expandable" onclick="toggleExpand(this)">
+                    <div class="expandable-header">
+                        <span>◈ Unblending</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p style="color: var(--slate); line-height: 1.7;">
+                            When we're "blended" with a part, we feel completely taken over by it - "I AM anxious" rather than "I NOTICE an anxious part." Unblending means creating space to observe the part from Self. This allows curiosity and compassion to emerge. Creative expression naturally supports unblending by externalizing inner experience.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="expandable" onclick="toggleExpand(this)">
+                    <div class="expandable-header">
+                        <span>◈ The 6 F's of IFS Work</span>
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="expandable-content">
+                        <p style="color: var(--slate); line-height: 1.7; margin-bottom: 1rem;">
+                            While formal IFS therapy follows these steps systematically, today's creative exploration touches on them organically:
+                        </p>
+                        <ul style="list-style: none; padding-left: 1rem;">
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">Find:</strong> Notice and locate a part</li>
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">Focus:</strong> Give it attention and space</li>
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">Flesh out:</strong> Learn about it through creative expression</li>
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">Feel toward:</strong> Notice how you relate to this part</li>
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">beFriend:</strong> Build relationship and trust</li>
+                            <li style="margin: 0.5rem 0;"><strong style="color: var(--earth-green);">Fears:</strong> Understand what this part is protecting you from</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Meeting Your Parts Today</h2>
+                
+                <div class="info-box">
+                    <strong>Important Reminder:</strong>
+                    This is an introduction to parts work, not therapy. If working with a specific part brings up intense emotions, that's a sign this part might need more support than a group setting can provide. Consider working with an IFS-trained therapist for deeper healing.
+                </div>
+
+                <p style="color: var(--slate); line-height: 1.8; margin-top: 1.5rem;">
+                    As you move through the creative stations today, you might choose to:
+                </p>
+                <ul style="color: var(--slate); line-height: 2; margin: 1rem 0 1rem 2rem;">
+                    <li>Focus on one part deeply</li>
+                    <li>Explore multiple parts across different mediums</li>
+                    <li>Create a dialogue between polarized parts</li>
+                    <li>Give voice to an exile that rarely gets heard</li>
+                    <li>Thank a protector for its hard work</li>
+                    <li>Connect with Self and its qualities</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PAGE 3: SEVEN STATIONS -->
+        <div class="page" id="page2">
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Seven Creative Pathways</h2>
+                
+                <p style="color: var(--slate); line-height: 1.8; margin-bottom: 2rem;">
+                    Choose 2-3 stations that call to you. There's no right order. Let your parts guide you to the mediums that want expression today. Remember: you can always pass on any prompt that doesn't feel right.
+                </p>
+
+                <div class="info-box">
+                    <strong>Station Structure:</strong> Spend 15-20 minutes at each station you choose. Take breaks as needed. Move at your own pace.
+                </div>
+            </div>
+
+            <div class="stations-grid">
+                <!-- Station 1: Visual Arts -->
+                <div class="station-card">
+                    <div class="station-number">1</div>
+                    <h3>Visual Arts Station</h3>
+                    <p class="station-description">
+                        Draw, paint, or collage your parts as characters, symbols, or abstract forms
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Create a "parts portrait" - draw different parts as distinct characters or figures in one image</li>
+                        <li>Give each part a color, shape, or symbol that represents its energy</li>
+                        <li>Draw your internal landscape - where do your parts live? Mountains, caves, gardens, rooms?</li>
+                        <li>Create a comic strip showing a conversation between two polarized parts</li>
+                        <li>Paint your Self (core essence) at the center with parts arranged around it</li>
+                        <li>Use abstract art to show how a part FEELS rather than what it looks like</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Materials available:</strong> Paper, markers, colored pencils, watercolors, magazines for collage, pastels
+                    </div>
+                </div>
+
+                <!-- Station 2: Movement -->
+                <div class="station-card">
+                    <div class="station-number">2</div>
+                    <h3>Movement & Embodiment</h3>
+                    <p class="station-description">
+                        Explore how different parts move, hold tension, or express themselves through the body
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Move as a manager part - how does it hold the body? Sharp? Tense? Controlled?</li>
+                        <li>Embody a firefighter part - quick movements, escape, distraction</li>
+                        <li>Give gentle movement to an exile - small, protective, vulnerable gestures</li>
+                        <li>Create a movement sequence showing transition from blended to unblended state</li>
+                        <li>Dance a dialogue between two parts - let them "speak" through gesture</li>
+                        <li>Find the movement of Self - grounded, flowing, centered</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Note:</strong> This can be gentle and small. You don't need to move your whole body. Hand gestures, facial expressions, or subtle shifts in posture all count.
+                    </div>
+                </div>
+
+                <!-- Station 3: Music -->
+                <div class="station-card">
+                    <div class="station-number">3</div>
+                    <h3>Music & Sound Station</h3>
+                    <p class="station-description">
+                        Assign soundscapes, songs, or rhythms to different parts
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Create a playlist for different parts - what songs represent them?</li>
+                        <li>Use instruments to give each part a sound (drum, bells, shakers, voice)</li>
+                        <li>What's the tempo of your manager parts? Your exiles? Your firefighters?</li>
+                        <li>Compose a simple melody or rhythm that represents Self energy</li>
+                        <li>Notice what music helps parts feel heard or helps them relax</li>
+                        <li>Create a "parts symphony" - how would they sound playing together?</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Materials available:</strong> Simple percussion instruments, access to music streaming for playlist creation, voice recording option
+                    </div>
+                </div>
+
+                <!-- Station 4: Writing -->
+                <div class="station-card">
+                    <div class="station-number">4</div>
+                    <h3>Writing & Dialogue</h3>
+                    <p class="station-description">
+                        Write letters, dialogues, or narratives from and to your parts
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Write a dialogue between a protective part and the exile it's protecting</li>
+                        <li>Let a part write a letter to you from its perspective: "What you don't know about me is..."</li>
+                        <li>Journal as different parts - give each one a voice</li>
+                        <li>Write a "parts meeting" - what would they say to each other?</li>
+                        <li>Create a poem from the voice of Self, speaking to all parts</li>
+                        <li>Write the origin story of a part: "I was born when..."</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Tip:</strong> Try writing with your non-dominant hand when dialoguing with younger, exile parts. It can help access different states.
+                    </div>
+                </div>
+
+                <!-- Station 5: Drama/Psychodrama -->
+                <div class="station-card">
+                    <div class="station-number">5</div>
+                    <h3>Drama & Role-Play</h3>
+                    <p class="station-description">
+                        Act out, embody, or give voice to different parts through dramatic expression
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Create a short scene between two parts having a conversation</li>
+                        <li>Use objects or puppets to represent different parts and have them interact</li>
+                        <li>Practice saying out loud what each part's core message is</li>
+                        <li>Physically place yourself in different locations in the room as different parts</li>
+                        <li>Use masks or simple costume pieces to embody parts briefly</li>
+                        <li>Record yourself speaking as different parts - notice tone, pace, volume changes</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Privacy option:</strong> This can be done quietly, just for yourself. You don't need to perform for others.
+                    </div>
+                </div>
+
+                <!-- Station 6: Fashion/Adornment -->
+                <div class="station-card">
+                    <div class="station-number">6</div>
+                    <h3>Fashion & Symbolic Adornment</h3>
+                    <p class="station-description">
+                        Create wearable representations of parts or Self through fabric, jewelry, or symbolic items
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Design a bracelet or charm for a specific part</li>
+                        <li>Choose colors and textures that represent different parts</li>
+                        <li>Create a "Self" token to carry as a reminder of your centered core</li>
+                        <li>Make simple masks that represent protective vs. vulnerable parts</li>
+                        <li>Design a "parts wardrobe" - what would each part wear?</li>
+                        <li>Create a small talisman that represents integration of parts</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>Materials available:</strong> Beads, string, fabric scraps, ribbons, simple clay, decorative items
+                    </div>
+                </div>
+
+                <!-- Station 7: Open Intuitive -->
+                <div class="station-card">
+                    <div class="station-number">7</div>
+                    <h3>Open Intuitive Exploration</h3>
+                    <p class="station-description">
+                        Follow your instinct - combine mediums or create in whatever way calls to you
+                    </p>
+                    
+                    <ul class="prompts-list">
+                        <li>Build a three-dimensional "parts council" using found objects</li>
+                        <li>Create a parts map showing relationships, distances, conflicts</li>
+                        <li>Make a meditation guide for connecting with Self</li>
+                        <li>Design a "parts board game" showing the journey toward integration</li>
+                        <li>Create whatever your parts are asking to create right now</li>
+                        <li>Combine multiple mediums to tell the story of one part's journey</li>
+                    </ul>
+
+                    <div style="margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.1); border-radius: 8px; font-size: 0.9rem; color: var(--slate);">
+                        <strong>This is your space:</strong> There are no wrong ways to explore. Trust your creative instincts.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4: INTEGRATION & CLOSING -->
+        <div class="page" id="page3">
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Integration & Reflection</h2>
+                
+                <div class="reflection-section">
+                    <h3 style="color: var(--earth-green); margin-bottom: 1.5rem;">Personal Reflection Prompts</h3>
+                    
+                    <div class="input-group">
+                        <label>Which parts did you meet or work with today?</label>
+                        <textarea id="partsMetInput" placeholder="Name them, describe them, or just list how many showed up..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What surprised you about your internal system?</label>
+                        <textarea id="surprisesInput" placeholder="New insights, unexpected connections, or things you hadn't noticed before..."></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Which part needs the most compassion right now?</label>
+                        <textarea id="compassionInput" placeholder="What does this part need to hear or feel?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>How did your creative process support unblending?</label>
+                        <textarea id="unblendingInput" placeholder="Did externalizing your parts through art/movement/writing create any space between you and them?"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <label>What would help you stay connected to Self in daily life?</label>
+                        <textarea id="selfConnectionInput" placeholder="Practices, reminders, rituals..."></textarea>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn" onclick="saveReflection()">Save My Reflection</button>
+                        <button class="btn btn-secondary" onclick="clearReflection()">Clear</button>
+                    </div>
+
+                    <div id="savedNotice" style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(135, 168, 120, 0.2); border-radius: 8px; text-align: center; color: var(--earth-green); font-weight: 600;">
+                        ✓ Reflection saved! Your insights are held safely.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Group Sharing (Optional)</h2>
+                
+                <div class="info-box">
+                    <strong>Sharing Guidelines:</strong>
+                    This is completely voluntary. You might choose to share:
+                    • A piece of your creative work
+                    • An insight or discovery about your parts
+                    • A question that arose during the process
+                    • Simply witnessing others without sharing yourself
+                </div>
+
+                <p style="color: var(--slate); line-height: 1.8; margin-top: 1.5rem;">
+                    <strong style="color: var(--earth-green);">Circle Sharing Questions:</strong>
+                </p>
+                <ul style="color: var(--slate); line-height: 2; margin: 1rem 0 1rem 2rem;">
+                    <li>What part showed up strongest for you today?</li>
+                    <li>Did any parts surprise you?</li>
+                    <li>What medium helped you connect most deeply?</li>
+                    <li>What are you taking with you from this exploration?</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Closing Ritual</h2>
+                
+                <div class="reflection-section">
+                    <p style="color: var(--slate); line-height: 1.8; margin-bottom: 1.5rem;">
+                        <strong style="color: var(--earth-green);">Guided Closing (5 minutes)</strong><br><br>
+                        
+                        Take a comfortable position and close your eyes if that feels safe.<br>
+                        Take three deep breaths.<br><br>
+                        
+                        Imagine gathering all the parts you met today into a circle.<br>
+                        From your Self - that calm, compassionate center - thank each part for showing up.<br>
+                        Thank the managers for working so hard to keep you safe.<br>
+                        Thank the firefighters for stepping in when things felt overwhelming.<br>
+                        Thank the exiles for their courage in being seen.<br>
+                        Thank your Self for creating space to hold them all.<br><br>
+                        
+                        Know that these parts are always with you.<br>
+                        You can return to this creative conversation with them anytime.<br>
+                        They don't need to be fixed or changed - just witnessed, understood, and held with compassion.<br><br>
+                        
+                        When you're ready, take a final deep breath and open your eyes.<br>
+                        Welcome back.
+                    </p>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <strong>Continuing Your Parts Work:</strong>
+                    • Keep a parts journal - check in with different parts regularly
+                    • Notice which parts show up in stressful situations
+                    • Practice unblending: "I notice an anxious part" vs. "I am anxious"
+                    • Consider working with an IFS-trained therapist for deeper exploration
+                    • Remember: All parts are welcome, all parts have wisdom
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><span class="section-symbol">⊙</span> Resources for Continued Learning</h2>
+                
+                <div class="concepts-grid">
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Books</h3>
+                        <p>"No Bad Parts" by Richard Schwartz<br>"Self-Therapy" by Jay Earley<br>"You Are the One You've Been Waiting For" by Richard Schwartz</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Websites</h3>
+                        <p>IFS Institute: selfleadership.org<br>Find IFS therapists: ifs-institute.com/practitioners</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Apps & Tools</h3>
+                        <p>IFS Companion App<br>Parts Detector Exercise<br>IFS guided meditations on Insight Timer</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3><span class="concept-symbol">◈</span> Practice</h3>
+                        <p>Daily parts check-ins<br>Creative journaling with parts<br>Self-led meditation<br>IFS therapy if available</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="crisis-box">
+                <h3>◈ Support Resources</h3>
+                <p>
+                    If parts work brings up overwhelming emotions or memories:<br><br>
+                    <strong>National Suicide Prevention Lifeline:</strong> 988<br>
+                    <strong>Crisis Text Line:</strong> Text HOME to 741741<br>
+                    <strong>SAMHSA National Helpline:</strong> 1-800-662-4357<br>
+                    <strong>NAMI Helpline:</strong> 1-800-950-6264<br><br>
+                    Consider reaching out to a trauma-informed, IFS-trained therapist for ongoing support.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageIndex) {
+            const pages = document.querySelectorAll('.page');
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === pageIndex);
+            });
+            
+            pills.forEach((pill, index) => {
+                pill.classList.toggle('active', index === pageIndex);
+            });
+
+            // Scroll to top when changing pages
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle expandable content
+        function toggleExpand(element) {
+            element.classList.toggle('open');
+        }
+
+        // Save reflection
+        function saveReflection() {
+            const reflection = {
+                partsMet: document.getElementById('partsMetInput').value,
+                surprises: document.getElementById('surprisesInput').value,
+                compassion: document.getElementById('compassionInput').value,
+                unblending: document.getElementById('unblendingInput').value,
+                selfConnection: document.getElementById('selfConnectionInput').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            localStorage.setItem('ifs_parts_reflection', JSON.stringify(reflection));
+
+            // Show confirmation
+            const notice = document.getElementById('savedNotice');
+            notice.style.display = 'block';
+            setTimeout(() => {
+                notice.style.display = 'none';
+            }, 3000);
+        }
+
+        // Clear reflection
+        function clearReflection() {
+            if (confirm('Are you sure you want to clear your reflection? This cannot be undone.')) {
+                document.getElementById('partsMetInput').value = '';
+                document.getElementById('surprisesInput').value = '';
+                document.getElementById('compassionInput').value = '';
+                document.getElementById('unblendingInput').value = '';
+                document.getElementById('selfConnectionInput').value = '';
+            }
+        }
+
+        // Load saved reflection on page load
+        window.addEventListener('load', () => {
+            const saved = localStorage.getItem('ifs_parts_reflection');
+            if (saved) {
+                const reflection = JSON.parse(saved);
+                if (confirm('Would you like to load your previously saved reflection?')) {
+                    document.getElementById('partsMetInput').value = reflection.partsMet || '';
+                    document.getElementById('surprisesInput').value = reflection.surprises || '';
+                    document.getElementById('compassionInput').value = reflection.compassion || '';
+                    document.getElementById('unblendingInput').value = reflection.unblending || '';
+                    document.getElementById('selfConnectionInput').value = reflection.selfConnection || '';
+                }
+            }
+
+            // Animate cards on load
+            const cards = document.querySelectorAll('.concept-card, .station-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeIn 0.6s ease ${index * 0.1}s both`;
+            });
+        });
+    </script>
+</body>
+</html>
